@@ -1,0 +1,58 @@
+# ---------------------------------------------------------------------------
+# Portfolio — .gitignore
+#
+# Rule of thumb: if it contains a key, is machine-specific, or can be
+# regenerated from source, it does not belong in the repo.
+# ---------------------------------------------------------------------------
+
+
+# --- Secrets ---------------------------------------------------------------
+# .env holds the Formspree endpoint. .env.example is the committed template
+# and is explicitly un-ignored below.
+.env
+.env.*
+!.env.example
+
+*.pem
+*.key
+
+
+# --- Dependencies ----------------------------------------------------------
+node_modules/
+
+
+# --- Build output ----------------------------------------------------------
+dist/
+dist-ssr/
+.vite/
+*.local
+
+
+# --- Deployment ------------------------------------------------------------
+# Vercel CLI writes project + org IDs here after `vercel link`
+.vercel
+
+
+# --- Tooling caches --------------------------------------------------------
+.cache/
+.eslintcache
+coverage/
+
+
+# --- Logs ------------------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+
+
+# --- Editor / OS -----------------------------------------------------------
+# Machine-local Claude Code permission grants — contains local paths.
+.claude/settings.local.json
+
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.sw?
+.DS_Store
+Thumbs.db
+Desktop.ini
