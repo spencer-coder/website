@@ -35,8 +35,18 @@ function ScreenshotFrame({ src, alt }) {
 }
 
 export function ProjectCard({ project }) {
-  const { name, tagline, year, screenshot, liveUrl, repoUrl, stack, highlights, caseStudy } =
-    project;
+  const {
+    name,
+    tagline,
+    year,
+    screenshot,
+    liveUrl,
+    liveNote,
+    repoUrl,
+    stack,
+    highlights,
+    caseStudy,
+  } = project;
 
   return (
     <article className="group border-ink-700/60 bg-ink-900/50 hover:border-ink-600 hover:bg-ink-900 rounded-2xl border p-5 transition duration-300 sm:p-6">
@@ -87,6 +97,14 @@ export function ProjectCard({ project }) {
               <ArrowUpRightIcon className="text-xs" />
             </a>
           </div>
+
+          {/* A free-tier app that takes a minute to wake looks broken unless you
+              say so first. Cheaper to set the expectation than to lose the click. */}
+          {liveUrl && liveNote && (
+            <p className="text-ink-400/80 border-ink-700/60 mt-3 border-l-2 py-0.5 pl-3 text-xs leading-relaxed">
+              {liveNote}
+            </p>
+          )}
         </div>
       </div>
 

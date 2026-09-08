@@ -7,33 +7,36 @@
 // ---------------------------------------------------------------------------
 
 export const profile = {
-  name: 'Spencer Bokor',
+  name: 'Spencer Selorm Bokor',
   role: 'Full-stack Developer',
 
   // The one line a recruiter reads before deciding whether to keep scrolling.
-  pitch: 'I build full-stack web applications with React, Node and Postgres.',
+  pitch:
+    'Computer Science graduate building full-stack web applications, with two years supporting ' +
+    'IT systems in hospital and university settings.',
 
   // Shown as a small badge under the pitch. null hides it entirely.
   availability: null,
 
-  // TODO: replace with two or three real sentences. What got you into
-  // building things, what you're studying, what you're drawn to technically.
   about: [
-    'I got into programming because I kept running into small problems in my own life that ' +
-      'software could obviously solve — and I wanted to be the one to solve them. Both of the ' +
-      'projects below started that way.',
-    'I like the parts of the job that are unglamorous: making an app fail gracefully when a ' +
-      'service is down, keeping secrets out of a repo, writing the deploy doc so the next ' +
-      'person is not stuck. I care more about shipping something that holds up than about ' +
-      'using the newest framework.',
+    'I studied Computer Science at Ghana Communication Technology University, then spent two ' +
+      'years doing IT support — an internship at the University of Health and Allied Sciences, ' +
+      'and national service at Ho Teaching Hospital. Most of that work was being the person ' +
+      'someone comes to when a system is not doing what they need it to do.',
+    'That is what pulled me toward building software rather than only maintaining it. Supporting ' +
+      'users teaches you that an application is judged on how it behaves at its worst moment, ' +
+      'not its best — so I care about the parts that are easy to skip: failing with a message ' +
+      'that says what to fix, keeping secrets out of the repo, writing the deploy doc so the ' +
+      'next person is not stuck. Both projects below are things I wanted to exist and built ' +
+      'end to end.',
   ],
 
   email: 'spencerbokor07@gmail.com',
   phone: '0542354403',
   github: 'https://github.com/spencer-coder',
   githubUsername: 'spencer-coder',
-  linkedin: 'https://www.linkedin.com/in/spencer-bokor', // TODO: confirm this URL
-  resume: '/resume.pdf', // TODO: drop the real PDF into public/
+  linkedin: 'https://www.linkedin.com/in/spencer-bokor/',
+  resume: '/resume.pdf', // TODO: drop Spencer_Resume.pdf into public/
 };
 
 // Sections rendered in the main column, in order. The sidebar nav and the
@@ -60,35 +63,42 @@ export const projects = [
     tagline: 'A personal budget tracker: set a monthly limit, log expenses, see what is left.',
     year: '2025',
     screenshot: '/screenshots/runway.png', // TODO: real screenshot
-    liveUrl: null, // TODO: paste the deployed URL
+    liveUrl: 'https://runway-1e7s.onrender.com/',
+    // Setting expectations beats a visitor deciding the app is broken.
+    liveNote:
+      'Hosted on Render’s free tier, which sleeps after a spell of inactivity. The first load ' +
+      'can take up to a minute to wake the server.',
     repoUrl: 'https://github.com/spencer-coder/Runway',
-    stack: ['React', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Multer'],
+    stack: ['React', 'Redux Toolkit', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Render'],
     highlights: [
       'Email and password accounts with bcrypt-hashed credentials',
-      'Receipt image uploads attached to individual expenses',
       'Monthly spending limits with live remaining-budget calculation',
+      'Expenses logged against categories, scoped per user per month',
     ],
     caseStudy: {
       problem:
         'I wanted to know how much of my monthly budget was actually left at any given moment, ' +
-        'without opening a spreadsheet and adding things up. Existing apps either wanted bank ' +
-        'credentials or buried the one number I cared about.',
+        'without opening a spreadsheet and adding it up. Most apps show what you have spent. ' +
+        'The number I care about is what remains.',
       approach:
-        'A REST API on Express with Mongoose models for users and expenses, and a React frontend ' +
-        'that keeps a running total. Authentication is JWT-based: passwords are hashed with ' +
-        'bcrypt before they ever reach the database, and every expense route is scoped to the ' +
-        'authenticated user so one account can never read another account’s data.',
+        'A REST API on Express with Mongoose models for users, budgets and expenses, and a ' +
+        'React frontend using Redux Toolkit for state. Authentication is JWT-based: passwords ' +
+        'are hashed with bcrypt before they reach the database, and every budget and expense ' +
+        'query is filtered by the authenticated user, so one account cannot read another’s data.',
       challenge:
-        'Receipt uploads were the interesting part. Handling multipart form data meant adding ' +
-        'Multer and writing files to an uploads directory — which immediately raised the ' +
-        'question of what belongs in version control. The directory has to exist for the server ' +
-        'to boot, but the receipts inside it are personal and must never be committed. I also ' +
-        'had to make the API reject anything that was not an image rather than trusting the ' +
-        'filename the browser sent.',
+        'Modelling the budget itself. A budget belongs to a user and a calendar month, so I ' +
+        'store the month as a "YYYY-MM" string with a compound unique index on user, month and ' +
+        'category — the database, not the application, guarantees you cannot end up with two ' +
+        'budgets for the same month. Setting one is a single upsert rather than a read then ' +
+        'write, which removes the race between them. The category field defaults to null for ' +
+        'the overall budget, so per-category budgets can be added later without a migration. ' +
+        'Fetching a budget that does not exist returns null rather than a 404, because not ' +
+        'having set one yet is a normal state, not an error.',
       learned:
-        'That the security-relevant parts of a small app are mostly boring discipline: hash ' +
-        'before storing, scope every query to the current user, validate uploads server-side, ' +
-        'and keep secrets in environment variables rather than in the repo.',
+        'To let the database enforce what must always be true. Validating in the controller is ' +
+        'worth doing, but a unique index holds even when a request arrives twice at once — and ' +
+        'choosing the shape of the data carefully at the start is what makes the code on top of ' +
+        'it simple.',
     },
   },
   {
@@ -97,7 +107,10 @@ export const projects = [
     tagline: 'A home-workout companion focused on how to do each exercise, not just what to do.',
     year: '2025',
     screenshot: '/screenshots/formfit.png', // TODO: real screenshot
-    liveUrl: null, // TODO: paste the deployed Vercel URL
+    liveUrl: 'https://formfit-beige.vercel.app/',
+    liveNote:
+      'The site itself is always up, but Supabase pauses free projects after long inactivity, ' +
+      'so the exercise library may need a moment to come back.',
     repoUrl: 'https://github.com/spencer-coder/formfit',
     stack: ['React 19', 'Vite', 'Tailwind CSS', 'Supabase', 'Postgres', 'Vercel'],
     highlights: [
@@ -116,16 +129,21 @@ export const projects = [
         'all database access goes through a single module rather than being scattered across ' +
         'components — which made it straightforward to add caching and error handling in one place.',
       challenge:
-        'Vite bakes environment variables into the bundle at build time, so a missing key does ' +
-        'not fail loudly — it produces an app that renders a blank white screen in production ' +
-        'with nothing in the console to explain it. I made the app detect unconfigured ' +
-        'credentials at startup and render an explicit "Supabase is not configured" state ' +
-        'instead. It turned the worst class of bug to diagnose into a message that tells you ' +
-        'exactly what to fix.',
+        'Two failures that both looked like a broken app rather than a configuration mistake. ' +
+        'The Supabase dashboard displays the project URL with a /rest/v1/ suffix, but the client ' +
+        'library appends that path itself — so pasting the value you are shown produces ' +
+        '/rest/v1/rest/v1/ and the error "Invalid path specified in request URL", which tells ' +
+        'you nothing about the real cause. I wrote a small function that strips the suffix, ' +
+        'shared between the browser client and the Node seed script. Separately, Vite bakes env ' +
+        'vars in at build time, so a missing key produces a blank white screen in production ' +
+        'with nothing in the console. The app now checks its credentials at startup — including ' +
+        'whether they are still the placeholder values from .env.example — and renders an ' +
+        'explicit "Supabase is not configured" message instead.',
       learned:
-        'To design for the failure path first. Every external service the app depends on will be ' +
-        'unavailable or misconfigured at some point, and deciding in advance what the user sees ' +
-        'when that happens is cheaper than debugging a blank page later.',
+        'To design for the failure path first. Every external service will be unavailable or ' +
+        'misconfigured at some point, and deciding in advance what the user sees costs far less ' +
+        'than debugging a blank page later. Both fixes came from being the person who used to ' +
+        'get called when a system broke with no useful error.',
     },
   },
 ];
@@ -142,8 +160,9 @@ export const skills = [
     title: 'Comfortable with',
     note: 'Used to build and ship the projects above.',
     items: [
-      'JavaScript (ES2023)',
+      'JavaScript',
       'React',
+      'HTML / CSS',
       'Node.js',
       'Express',
       'MongoDB / Mongoose',
@@ -152,13 +171,22 @@ export const skills = [
       'Vite',
       'REST APIs',
       'Git',
-      'Vercel',
     ],
   },
   {
     title: 'Currently learning',
-    note: 'Actively working through these.',
-    items: ['TypeScript', 'Testing (Vitest)', 'Next.js', 'SQL query performance', 'Docker'],
+    note: 'Working through it by building small projects.',
+    items: ['Python'],
+  },
+  {
+    title: 'Next up',
+    note: 'What I plan to pick up soon.',
+    items: ['Testing', 'SQL', 'Next.js'],
+  },
+  {
+    title: 'IT and support',
+    note: 'Two years across a university and a teaching hospital.',
+    items: ['IT support & troubleshooting', 'Network troubleshooting', 'Staff training'],
   },
 ];
 
