@@ -21,7 +21,8 @@ export const profile = {
   github: 'https://github.com/spencer-coder',
   githubUsername: 'spencer-coder',
   linkedin: 'https://www.linkedin.com/in/spencer-bokor/',
-  resume: '/resume.pdf', // TODO: drop Spencer_Resume.pdf into public/
+  // Named rather than "resume.pdf", so it downloads with your name on it.
+  resume: '/Spencer_Bokor_Resume.pdf',
 };
 
 // Section order. The sidebar nav and the scroll-spy both derive from this.
