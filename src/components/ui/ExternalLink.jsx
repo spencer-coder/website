@@ -1,11 +1,5 @@
 import { ArrowUpRightIcon } from './Icons.jsx';
 
-/**
- * An outbound link with a trailing arrow.
- *
- * `rel="noreferrer"` is not decoration: without `noopener` a new tab can reach
- * back through `window.opener`, and older browsers only honour it via that pair.
- */
 export function ExternalLink({ href, children, className = '', ...rest }) {
   return (
     <a

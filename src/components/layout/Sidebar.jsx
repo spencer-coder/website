@@ -1,14 +1,6 @@
 import { profile, navigation } from '../../content/portfolio.js';
 import { GitHubIcon, LinkedInIcon, MailIcon, DocumentIcon, PhoneIcon } from '../ui/Icons.jsx';
 
-/**
- * The fixed identity column.
- *
- * On large screens it sticks for the whole scroll, so a recruiter can always
- * see who this is and how to reach them. Below `lg` it becomes an ordinary
- * stacked header — there are only five destinations, which is well short of
- * needing a hamburger menu.
- */
 export function Sidebar({ activeId }) {
   return (
     <header className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:max-h-screen lg:w-88 lg:flex-none lg:flex-col lg:justify-between lg:py-16 xl:w-104">
@@ -52,8 +44,6 @@ function SidebarNav({ activeId }) {
                   isActive ? 'text-ink-100' : 'text-ink-400 hover:text-ink-100'
                 }`}
               >
-                {/* The rule grows as its section comes into view. Hidden on
-                    small screens where the nav is a horizontal row. */}
                 <span
                   aria-hidden="true"
                   className={`hidden h-px transition-all duration-300 lg:block ${
@@ -84,8 +74,6 @@ function SidebarLinks() {
   return (
     <ul className="mt-10 flex items-center gap-2 lg:mt-0">
       {links.map(({ href, label, Icon }) => {
-        // Only http(s) destinations should open a new tab; mailto: and the
-        // résumé PDF are better left to the browser's own handling.
         const isExternal = href.startsWith('http');
 
         return (

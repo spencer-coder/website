@@ -1,11 +1,4 @@
-// ---------------------------------------------------------------------------
-// A tiny TTL cache over localStorage.
-//
-// Every access is wrapped in try/catch on purpose: localStorage throws rather
-// than returning null in private browsing and when a browser is set to block
-// site data, and a portfolio must not white-screen because someone opened it in
-// an incognito window.
-// ---------------------------------------------------------------------------
+// localStorage throws in private browsing, so every access is guarded.
 
 export function readCache(key, maxAgeMs) {
   try {
@@ -25,6 +18,6 @@ export function writeCache(key, value) {
   try {
     window.localStorage.setItem(key, JSON.stringify({ storedAt: Date.now(), value }));
   } catch {
-    // A full quota or blocked storage costs us the cache, not the page.
+    // Losing the cache is fine; losing the page is not.
   }
 }

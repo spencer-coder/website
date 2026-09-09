@@ -45,6 +45,13 @@ logs/
 npm-debug.log*
 
 
+# --- Personal notes --------------------------------------------------------
+# My own reference for editing and deploying this site. Nobody else runs it,
+# so it does not belong in the repo.
+NOTES.md
+DEPLOY.md
+
+
 # --- Editor / OS -----------------------------------------------------------
 # Machine-local Claude Code permission grants — contains local paths.
 .claude/settings.local.json

@@ -1,15 +1,7 @@
-// ---------------------------------------------------------------------------
-// Live repository data from the public GitHub REST API.
-//
-// Unauthenticated, so there is no token in this repo and none needs to reach
-// the browser. That caps us at 60 requests per hour per IP, which is plenty for
-// a portfolio but is not a guarantee — see `useGitHub` for the cache and the
-// fallback that make a rate limit invisible to a visitor.
-// ---------------------------------------------------------------------------
+// Unauthenticated, so no token ships to the browser: 60 requests/hour per IP.
 
 const API_ROOT = 'https://api.github.com';
 
-/** Repos are trimmed to the fields the UI renders — the raw payload is ~100 keys each. */
 function toRepoSummary(repo) {
   return {
     id: repo.id,
@@ -37,6 +29,5 @@ export async function fetchRecentRepos(username, { limit = 6, signal } = {}) {
   const repos = await response.json();
   if (!Array.isArray(repos)) throw new Error('Unexpected GitHub API response');
 
-  // Forks are somebody else's work and say nothing about what Spencer builds.
   return repos.filter((repo) => !repo.fork).map(toRepoSummary);
 }

@@ -1,10 +1,3 @@
-/**
- * Wraps every section so the anchor id, heading level and spacing are declared
- * in one place rather than repeated five times.
- *
- * `aria-labelledby` ties the region to its own heading, which is what lets a
- * screen reader announce "Projects, region" when jumping between landmarks.
- */
 export function Section({ id, eyebrow, title, children }) {
   const headingId = `${id}-heading`;
 

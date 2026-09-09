@@ -6,9 +6,6 @@ import { profile } from '../../content/portfolio.js';
 
 const ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT;
 
-// Deliberately permissive: the goal is catching typos like a missing @, not
-// adjudicating RFC 5322. Formspree verifies deliverability anyway, and an
-// over-strict pattern rejects valid addresses and loses a real contact.
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function validate({ name, email, message }) {
@@ -24,7 +21,7 @@ function validate({ name, email, message }) {
 
 export function Contact() {
   return (
-    <Section id="contact" eyebrow="05 — Contact" title="Get in touch">
+    <Section id="contact" eyebrow="05 / Contact" title="Get in touch">
       <p className="text-ink-400 -mt-4 mb-8 max-w-2xl leading-relaxed">
         I read everything that arrives. If you have a question, an opportunity, or something you
         want built, send it over.
@@ -46,8 +43,6 @@ function ContactForm() {
   function update(field) {
     return (event) => {
       setValues((current) => ({ ...current, [field]: event.target.value }));
-      // Clear the error as soon as the visitor starts fixing it, rather than
-      // making them submit again to find out whether they got it right.
       setErrors((current) => ({ ...current, [field]: undefined }));
     };
   }
@@ -58,8 +53,6 @@ function ContactForm() {
     const found = validate(values);
     if (Object.keys(found).length > 0) {
       setErrors(found);
-      // Move focus to the first problem so keyboard and screen reader users
-      // are taken to it instead of having to hunt back up the form.
       document.getElementById(`contact-${Object.keys(found)[0]}`)?.focus();
       return;
     }
@@ -93,7 +86,7 @@ function ContactForm() {
       >
         <p className="text-ink-100 font-semibold">Message sent.</p>
         <p className="text-ink-400 mt-2 text-sm leading-relaxed">
-          Thanks for reaching out — I'll get back to you at {values.email}.
+          Thanks for reaching out. I'll get back to you at {values.email}.
         </p>
       </div>
     );
@@ -101,8 +94,7 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-4">
-      {/* Honeypot. Bots fill in every field they find; people never see this
-          one. `tabIndex={-1}` keeps it out of the keyboard path too. */}
+      {/* Honeypot: bots fill every field they find, people never see this one. */}
       <div className="absolute left-[-9999px]" aria-hidden="true">
         <label htmlFor="contact-gotcha">Leave this field empty</label>
         <input id="contact-gotcha" name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
@@ -173,8 +165,6 @@ function Field({ id, label, error, as = 'input', ...rest }) {
         className={`field ${error ? 'border-rose-500/60' : ''}`}
         {...rest}
       />
-      {/* role="alert" so the message is announced when it appears, not just
-          coloured red — colour alone is not an error message. */}
       {error && (
         <p id={errorId} role="alert" className="mt-1.5 text-xs text-rose-300">
           {error}
@@ -184,14 +174,8 @@ function Field({ id, label, error, as = 'input', ...rest }) {
   );
 }
 
-/**
- * Rendered when VITE_FORMSPREE_ENDPOINT is unset.
- *
- * A form with nowhere to post looks identical to a working one and silently
- * eats every message, which is the worst possible failure for a contact page.
- * Showing an obvious mailto instead means a missing env var costs polish, not
- * an opportunity.
- */
+// Shown when VITE_FORMSPREE_ENDPOINT is unset: a form with nowhere to post
+// would look identical to a working one and swallow every message.
 function MailtoFallback() {
   return (
     <div className="border-ink-700/60 bg-ink-900/50 rounded-2xl border p-6">
@@ -207,13 +191,6 @@ function MailtoFallback() {
   );
 }
 
-/**
- * The routes that bypass the form entirely.
- *
- * No "email me" button here — the form beside it already sends email, and a
- * second control doing the same thing just adds a decision. This column is for
- * the things the form cannot do: read the résumé, or pick up the phone.
- */
 function DirectLinks() {
   return (
     <div className="space-y-3">
@@ -223,8 +200,6 @@ function DirectLinks() {
       </Button>
 
       {profile.phone && (
-        // Rendered as a tel: link so it dials straight from a phone, which is
-        // where a good share of these visits come from.
         <Button href={`tel:${profile.phone}`} variant="secondary" className="w-full">
           <PhoneIcon />
           {profile.phone}

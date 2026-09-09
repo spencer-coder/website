@@ -8,7 +8,6 @@ const BASE =
   'inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm transition ' +
   'disabled:cursor-not-allowed disabled:opacity-60';
 
-/** Renders an <a> when given `href`, a <button> otherwise. */
 export function Button({ variant = 'primary', href, className = '', children, ...rest }) {
   const classes = `${BASE} ${VARIANTS[variant]} ${className}`;
 

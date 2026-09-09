@@ -1,12 +1,5 @@
 import { useEffect, useState } from 'react';
 
-/**
- * Reports which section is currently in view so the sidebar nav can mark it.
- *
- * The observer's root margin biases toward the upper third of the viewport:
- * without it, two sections are on screen at once near a boundary and the
- * highlight flickers between them as you scroll.
- */
 export function useActiveSection(ids) {
   const [activeId, setActiveId] = useState(ids[0] ?? null);
 
@@ -25,6 +18,7 @@ export function useActiveSection(ids) {
 
         if (visible.length > 0) setActiveId(visible[0].target.id);
       },
+      // Biased to the upper third, otherwise the highlight flickers at boundaries.
       { rootMargin: '-10% 0px -65% 0px', threshold: 0 },
     );
 

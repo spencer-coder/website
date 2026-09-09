@@ -1,8 +1,3 @@
-// Inline SVGs rather than an icon package — there are six of them, and a
-// dependency for six paths is not worth the bundle or the supply chain.
-// All are decorative and hidden from assistive tech; their labels come from
-// the surrounding link text.
-
 const base = {
   width: '1em',
   height: '1em',

@@ -23,7 +23,7 @@ export function GitHubActivity() {
   const { repos, loading, stale } = useGitHub(USERNAME);
 
   return (
-    <Section id="activity" eyebrow="04 — Activity" title="What I'm working on now">
+    <Section id="activity" eyebrow="04 / Activity" title="What I'm working on now">
       <p className="text-ink-400 -mt-4 mb-8 max-w-2xl leading-relaxed">
         {stale
           ? 'My public repositories on GitHub.'
@@ -87,7 +87,6 @@ function RepoCard({ repo }) {
   );
 }
 
-/** Reserves the real card height so the section doesn't jump when data lands. */
 function SkeletonGrid() {
   return (
     <div className="grid gap-4 sm:grid-cols-2" aria-hidden="true">

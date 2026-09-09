@@ -9,8 +9,7 @@ import { useActiveSection } from './hooks/useActiveSection.js';
 import { navigation, profile } from './content/portfolio.js';
 
 export default function App() {
-  // Memoised because `useActiveSection` depends on this array by identity; a
-  // fresh array every render would tear down and rebuild the observer.
+  // Memoised: the observer depends on this array by identity.
   const sectionIds = useMemo(() => navigation.map((item) => item.id), []);
   const activeId = useActiveSection(sectionIds);
 
