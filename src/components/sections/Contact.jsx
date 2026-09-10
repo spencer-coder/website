@@ -23,8 +23,7 @@ export function Contact() {
   return (
     <Section id="contact" eyebrow="05 / Contact" title="Get in touch">
       <p className="text-ink-400 -mt-4 mb-8 max-w-2xl leading-relaxed">
-        I read everything that arrives. If you have a question, an opportunity, or something you
-        want built, send it over.
+        If you have a question, an opportunity, or something else feel free to contact me.
       </p>
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,15rem)]">
