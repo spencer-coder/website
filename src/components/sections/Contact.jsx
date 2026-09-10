@@ -194,9 +194,9 @@ function MailtoFallback() {
 function DirectLinks() {
   return (
     <div className="space-y-3">
-      <Button href={profile.resume} variant="secondary" className="w-full" download>
+      <Button href={profile.cv} variant="secondary" className="w-full" download>
         <DocumentIcon />
-        Download résumé
+        Download CV
       </Button>
 
       {profile.phone && (

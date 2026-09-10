@@ -1,6 +1,6 @@
 # Portfolio
 
-My personal site: what I have built, how I built it, and how to reach me.
+My personal portfolio website
 
 Live at <https://spencerbokor.vercel.app>
 

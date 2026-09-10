@@ -21,8 +21,7 @@ export const profile = {
   github: 'https://github.com/spencer-coder',
   githubUsername: 'spencer-coder',
   linkedin: 'https://www.linkedin.com/in/spencer-bokor/',
-  // Named rather than "resume.pdf", so it downloads with your name on it.
-  resume: '/Spencer_Bokor_Resume.pdf',
+  cv: '/Spencer_Bokor_CV.pdf',
 };
 
 // Section order. The sidebar nav and the scroll-spy both derive from this.
@@ -89,7 +88,7 @@ export const projects = [
     slug: 'formfit',
     name: 'FormFit',
     tagline: 'A home-workout companion focused on how to do each exercise, not just what to do.',
-    year: '2025',
+    year: '2026',
     screenshot: '/screenshots/formfit.png',
     screenshotSize: { width: 871, height: 898 },
     liveUrl: 'https://formfit-beige.vercel.app/',
@@ -114,7 +113,6 @@ export const projects = [
         'with their images in Supabase Storage. All database access goes through a single ' +
         'module rather than being spread across components, and an admin page edits the library ' +
         'in place, so adding an exercise never means redeploying the site.',
-      // Left empty on purpose. An empty field is skipped rather than rendered.
       challenge: '',
       flaws: [
         'The admin passcode is not a login. It only decides whether the editor renders, and it ' +

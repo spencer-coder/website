@@ -66,7 +66,7 @@ function SidebarLinks() {
   const links = [
     { href: profile.github, label: 'GitHub', Icon: GitHubIcon },
     { href: profile.linkedin, label: 'LinkedIn', Icon: LinkedInIcon },
-    { href: profile.resume, label: 'Résumé', Icon: DocumentIcon },
+    { href: profile.cv, label: 'CV', Icon: DocumentIcon },
     { href: `mailto:${profile.email}`, label: 'Email', Icon: MailIcon },
     profile.phone && { href: `tel:${profile.phone}`, label: 'Phone', Icon: PhoneIcon },
   ].filter(Boolean);
